@@ -8,3 +8,13 @@
 
   </div>
 </div>
+
+
+<!-- click = some kind of custom functionality defined in your component -->
+<input [(ngModel)]="guestSearch.firstName">
+
+<button (click)="findPeople(guestSearch)">search</button>
+
+<div>
+  {{guestSearch.firstName}}
+</div>

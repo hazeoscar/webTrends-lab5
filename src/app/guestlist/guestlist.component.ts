@@ -11,8 +11,17 @@ import { PeopleService } from '../people.service';
 })
 export class GuestlistComponent implements OnInit {
 
+  // defiing a new person
+  guestSearch: Person = new Person();
+  
   // undefined var that will hold your data 
   guests: Person[];
+
+  // method to find people 
+  findPeople(personQuery: Person): void{
+    console.log('search button clicked');
+    this.peopleService.getPeople(personQuery).subscribe(results => this.guests = results);
+  }
 
 
 
@@ -20,6 +29,7 @@ export class GuestlistComponent implements OnInit {
 
   ngOnInit() {
     this.peopleService.getPeople().subscribe(results => this.guests = results);
+    this.guestSearch.firstName = "Di Mascio";
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Person } from './person';
 import {Observable, of} from 'rxjs';
+import { pipeFromArray } from 'rxjs/internal/util/pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,19 @@ export class PeopleService {
 
   
   // allows you the get data when you are ready 
-  getPeople(): Observable<Person[]>{
+  getPeople(person?: Person): Observable<Person[]>{
+    if(person){
+      let results: Person[] = [];
+
+      for(let p of this.people){
+        if( person.firstName.toLocaleLowerCase() === p.firstName.toLocaleLowerCase() ){
+          results.push(p);
+        }
+      }
+
+      return of (results);
+    }
+    
     return of(this.people);
   }
   
